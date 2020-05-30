@@ -1,4 +1,4 @@
-package com.globhack.globhack;
+package com.beautifuldisruption.globhack;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
