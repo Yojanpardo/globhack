@@ -22,4 +22,5 @@ public abstract class Base {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
+	private boolean isActive;
 }
