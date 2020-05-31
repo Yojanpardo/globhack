@@ -5,11 +5,11 @@ package com.beautifuldisruption.globhack.model;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,22 +24,26 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @Entity
-@Table(name="users")
+@Table(name = "posts")
 @EqualsAndHashCode(callSuper=false)
-public class User extends Base{
+public class Post extends Base {
+
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
-	private String userId;
-	@Column(name = "auth0_id", unique = true)
-	private String auth0Id;
-	private String phoneNumber;
-	private boolean isVerified;
-	@OneToMany(mappedBy = "user")
-	private Set<Post> posts;
+	private String postId;
+	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
+	private User user;
+	private String title;
+	private String content;
+	@ManyToOne
+	@JoinColumn(name = "fatherPostId", nullable = true)
+	private Post fatherPost;
+	@OneToMany(mappedBy = "fatherPost")
+	private Set<Post> childrenPosts;
 	
-	
-	public User() {
+	public Post() {
 		super();
 	}
 }
