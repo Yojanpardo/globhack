@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Value;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,4 +31,6 @@ public class User extends Base{
 	@Column(name = "auth0_id", unique = true)
 	private String auth0Id;
 	private String phoneNumber;
+	private boolean isVerified;
+	private boolean isActive;
 }
