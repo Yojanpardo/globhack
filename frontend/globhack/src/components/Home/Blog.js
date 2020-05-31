@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import Header from './Header';
@@ -23,25 +22,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: 'Home', url: '#' },
+  { title: 'Blog', url: '#' },
+  { title: 'Compra', url: '#' },
+  { title: 'Vende', url: '#' },
+  
 ];
 
 const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
+  title: '#WeAreAnbau',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
+    "Deseamos que cualquier persona pueda encontrar el conocimiento y las herramientas necesarias para cultivar sus propios alimentos.",
+  image: 'https://images.unsplash.com/photo-1530860230002-bb67fbabe1ea?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
   imgText: 'main image description',
-  linkText: 'Continue reading…',
+  linkText: 'Conoce nuestras guias',
 };
 
 const featuredPosts = [
@@ -71,19 +65,9 @@ const sidebar = {
     'Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
   archives: [
     { title: 'March 2020', url: '#' },
-    { title: 'February 2020', url: '#' },
-    { title: 'January 2020', url: '#' },
-    { title: 'November 1999', url: '#' },
-    { title: 'October 1999', url: '#' },
-    { title: 'September 1999', url: '#' },
-    { title: 'August 1999', url: '#' },
-    { title: 'July 1999', url: '#' },
-    { title: 'June 1999', url: '#' },
-    { title: 'May 1999', url: '#' },
-    { title: 'April 1999', url: '#' },
+    
   ],
   social: [
-    { name: 'GitHub', icon: GitHubIcon },
     { name: 'Twitter', icon: TwitterIcon },
     { name: 'Facebook', icon: FacebookIcon },
   ],
@@ -115,7 +99,7 @@ export default function Blog() {
           </Grid>
         </main>
       </Container>
-      <Footer title="Footer" description="Something here to give the footer a purpose!" />
+      <Footer title="Footer" description="Beatiful Disruption - Anbau 2020" />
     </React.Fragment>
   );
 }
