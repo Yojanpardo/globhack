@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.beautifuldisruption.globhack.model.User;
@@ -26,6 +27,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javassist.NotFoundException;
 
 /**
  * @author yojan
@@ -41,10 +43,45 @@ public class UserResources {
 	public UserResources(UserServices userServices) {
 		this.userServices = userServices;
 	}
+
+	@GetMapping("/{userId}")
+	public ResponseEntity<User> getUser(@PathVariable("userId") String userId){
+		User user = this.userServices.findByUserId(userId);
+		ResponseEntity<User> response;
+		try {
+			if (user == null) {
+				response = new ResponseEntity<User>(user,HttpStatus.OK);
+			} else {
+				response = new ResponseEntity("Not found", HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception ex) {
+			response = new ResponseEntity(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return response;
+	}
 	
-	@GetMapping
+	@GetMapping("/")
+	@ApiOperation(
+			value = "Get all users", 
+			notes = "get all registered users in our platform"
+	)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "all users getted"),
+			@ApiResponse(code = 404, message = "No users found"),
+			@ApiResponse(code = 500, message = "Internal server error")
+	})
 	public ResponseEntity<List<User>> getUsers(){
-		return ResponseEntity.ok(this.userServices.findAll());
+		ResponseEntity<List<User>> response;
+		try {
+			response = new ResponseEntity<List<User>>(this.userServices.findAll(), HttpStatus.OK);
+		} catch (NullPointerException ex) {
+			response = new ResponseEntity(ex, HttpStatus.NOT_FOUND);
+		} catch (Exception ex) {
+			response = new ResponseEntity(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return response;
 	}
 	
 	@PostMapping
@@ -63,6 +100,8 @@ public class UserResources {
 		user.setAuth0Id(userVo.getAuth0Id());
 		user.setCreated(new Timestamp(System.currentTimeMillis()));
 		user.setModified(new Timestamp(System.currentTimeMillis()));
+		user.setActive(true);
+		user.setVerified(false);
 		ResponseEntity<User> response;
 		try {
 			response = new ResponseEntity<User>(this.userServices.register(user), HttpStatus.CREATED);
