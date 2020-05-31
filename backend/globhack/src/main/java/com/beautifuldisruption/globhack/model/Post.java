@@ -38,7 +38,7 @@ public class Post extends Base {
 	private User user;
 	private String title;
 	private String content;
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne(cascade={CascadeType.ALL}, optional = true)
 	@JoinColumn(name = "fatherPostId")
 	private Post fatherPost;
 	@OneToMany(mappedBy = "fatherPost")
