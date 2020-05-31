@@ -154,7 +154,7 @@ public class UserResources {
 				response = new ResponseEntity(ex.getCause(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} else {
-			response = new ResponseEntity<UserResponse>(HttpStatus.NOT_FOUND);
+			response = new ResponseEntity("Not found",HttpStatus.NOT_FOUND);
 		}
 
 		return response;
