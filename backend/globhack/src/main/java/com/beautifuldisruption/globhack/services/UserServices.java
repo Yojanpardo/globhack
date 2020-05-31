@@ -5,6 +5,7 @@ package com.beautifuldisruption.globhack.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +21,10 @@ import com.beautifuldisruption.globhack.repository.UserRepository;
 @Service
 @Transactional(readOnly = true)
 public class UserServices {
-	private final UserRepository userRepository;
 	
-	public UserServices(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
+	@Autowired
+	private UserRepository userRepository;
+	
 	
 	@Transactional
 	public User register(User user) {

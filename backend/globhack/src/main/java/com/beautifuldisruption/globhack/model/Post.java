@@ -3,10 +3,8 @@
  */
 package com.beautifuldisruption.globhack.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,18 +27,23 @@ import lombok.EqualsAndHashCode;
 @Table(name = "posts")
 @EqualsAndHashCode(callSuper=false)
 public class Post extends Base {
+
 	@Id
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	private String postId;
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId", nullable = false)
 	private User user;
 	private String title;
 	private String content;
-	@ManyToOne(cascade={CascadeType.ALL}, optional = true)
-	@JoinColumn(name = "fatherPostId")
+	@ManyToOne
+	@JoinColumn(name = "fatherPostId", nullable = true)
 	private Post fatherPost;
 	@OneToMany(mappedBy = "fatherPost")
-	private Set<Post> childrenPosts = new HashSet<>();
+	private Set<Post> childrenPosts;
+	
+	public Post() {
+		super();
+	}
 }

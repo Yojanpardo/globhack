@@ -5,6 +5,7 @@ package com.beautifuldisruption.globhack.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,11 @@ public class User extends Base{
 	private String auth0Id;
 	private String phoneNumber;
 	private boolean isVerified;
-	private boolean isActive;
 	@OneToMany(mappedBy = "user")
 	private Set<Post> posts;
+	
+	
+	public User() {
+		super();
+	}
 }
