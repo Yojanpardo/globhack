@@ -3,8 +3,6 @@
  */
 package com.beautifuldisruption.globhack.view.resources.vo;
 
-import java.util.Date;
-
 import lombok.Data;
 
 /**
